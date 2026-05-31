@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIStation — Your Personal AI. Private. Powerful. Yours.</title>
+<meta name="description" content="A personal AI workstation that runs entirely on your device. No cloud. No subscription. No data sharing. Just powerful AI that belongs to you.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --brand: #6C63FF;
+  --brand-dark: #4B44CC;
+  --brand-light: #EEF0FF;
+  --text: #0F0E1A;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+  --bg: #FFFFFF;
+  --bg2: #F8F9FF;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+
+.nav-logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; color: var(--brand); }
+.nav-logo-icon { width: 32px; height: 32px; background: var(--brand); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+.nav-cta { padding: 8px 18px; background: var(--brand); color: white; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: background 0.2s; }
+.nav-cta:hover { background: var(--brand-dark); }
+
+/* HERO */
+.hero {
+  padding: 96px 32px 80px;
+  text-align: center;
+  background: linear-gradient(180deg, #F0EFFE 0%, #FFFFFF 100%);
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--brand-light); color: var(--brand);
+  padding: 5px 14px; border-radius: 999px;
+  font-size: 13px; font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  max-width: 800px;
+  margin-left: auto; margin-right: auto;
+}
+
+.hero h1 span { color: var(--brand); }
+
+.hero p {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto 40px;
+}
+
+/* EMAIL FORM */
+.signup-form {
+  display: flex; gap: 10px;
+  max-width: 440px;
+  margin: 0 auto 16px;
+}
+
+.signup-form input {
+  flex: 1;
+  padding: 13px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.signup-form input:focus { border-color: var(--brand); }
+
+.signup-form button {
+  padding: 13px 22px;
+  background: var(--brand);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.signup-form button:hover { background: var(--brand-dark); }
+
+.form-note { font-size: 13px; color: var(--muted); }
+
+.success-msg {
+  display: none;
+  background: #DCFCE7; color: #166534;
+  padding: 12px 20px; border-radius: 10px;
+  font-size: 14px; font-weight: 600;
+  max-width: 440px; margin: 0 auto;
+}
+
+/* PROOF STRIP */
+.proof {
+  display: flex; align-items: center; justify-content: center; gap: 32px;
+  padding: 20px 32px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  flex-wrap: wrap;
+}
+
+.proof-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); font-weight: 500; }
+.proof-icon { font-size: 18px; }
+
+/* FEATURES */
+.features {
+  padding: 80px 32px;
+  background: var(--bg2);
+}
+
+.section-label {
+  text-align: center;
+  font-size: 13px; font-weight: 600; color: var(--brand);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 800;
+  margin-bottom: 56px;
+  letter-spacing: -0.01em;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.feature-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.feature-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.feature-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* HOW IT WORKS */
+.how {
+  padding: 80px 32px;
+  background: var(--bg);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.step { text-align: center; }
+
+.step-num {
+  width: 48px; height: 48px;
+  background: var(--brand);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 800;
+  margin: 0 auto 16px;
+}
+
+.step h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.step p { font-size: 14px; color: var(--muted); }
+
+/* PRICING */
+.pricing {
+  padding: 80px 32px;
+  background: var(--bg2);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 32px;
+}
+
+.pricing-card.featured {
+  border-color: var(--brand);
+  border-width: 2px;
+  position: relative;
+}
+
+.popular-badge {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  background: var(--brand); color: white;
+  padding: 4px 16px; border-radius: 999px;
+  font-size: 12px; font-weight: 700;
+  white-space: nowrap;
+}
+
+.plan-name { font-size: 14px; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
+.plan-price { font-size: 42px; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 4px; }
+.plan-price span { font-size: 18px; font-weight: 500; color: var(--muted); }
+.plan-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.plan-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.plan-features li::before { content: "✓"; color: var(--brand); font-weight: 700; flex-shrink: 0; }
+
+.plan-btn {
+  width: 100%; padding: 13px;
+  border-radius: 10px;
+  font-size: 15px; font-weight: 700;
+  cursor: pointer; border: none;
+  transition: all 0.2s;
+}
+
+.plan-btn.outline { background: white; border: 1.5px solid var(--border); color: var(--text); }
+.plan-btn.outline:hover { border-color: var(--brand); color: var(--brand); }
+.plan-btn.filled { background: var(--brand); color: white; }
+.plan-btn.filled:hover { background: var(--brand-dark); }
+
+/* BOTTOM CTA */
+.bottom-cta {
+  padding: 80px 32px;
+  text-align: center;
+  background: var(--brand);
+  color: white;
+}
+
+.bottom-cta h2 { font-size: clamp(26px, 3vw, 40px); font-weight: 800; margin-bottom: 16px; }
+.bottom-cta p { font-size: 17px; opacity: 0.85; margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+.bottom-form {
+  display: flex; gap: 10px;
+  max-width: 420px; margin: 0 auto 12px;
+}
+
+.bottom-form input {
+  flex: 1; padding: 13px 16px;
+  border: none; border-radius: 10px;
+  font-size: 15px; outline: none;
+}
+
+.bottom-form button {
+  padding: 13px 22px;
+  background: white; color: var(--brand);
+  border: none; border-radius: 10px;
+  font-size: 15px; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.bottom-form button:hover { opacity: 0.9; }
+.bottom-note { font-size: 13px; opacity: 0.7; }
+
+/* FOOTER */
+footer {
+  padding: 24px 32px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .hero { padding: 64px 20px 56px; }
+  .signup-form { flex-direction: column; }
+  nav { padding: 0 16px; }
+  .proof { gap: 16px; }
+  .bottom-form { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">🤖</div>
+    AIStation
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('hero-email').focus()">Join Waitlist</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🚀 Now accepting early access signups</div>
+  <h1>Your AI. <span>Private.</span><br>Powerful. Yours.</h1>
+  <p>A personal AI workstation that runs entirely on your device. No cloud. No subscription. No data sharing.</p>
+
+  <div class="signup-form">
+    <input type="email" id="hero-email" placeholder="Enter your email" />
+    <button onclick="handleSignup('hero-email', 'hero-success')">Get Early Access</button>
+  </div>
+  <div class="success-msg" id="hero-success">🎉 You're on the list! We'll be in touch soon.</div>
+  <p class="form-note">No spam. Unsubscribe any time.</p>
+</section>
+
+<!-- PROOF STRIP -->
+<div class="proof">
+  <div class="proof-item"><span class="proof-icon">🔒</span> 100% Private — data never leaves your device</div>
+  <div class="proof-item"><span class="proof-icon">💰</span> No monthly subscription</div>
+  <div class="proof-item"><span class="proof-icon">⚡</span> Works without internet</div>
+  <div class="proof-item"><span class="proof-icon">🛠️</span> Ready to use out of the box</div>
+</div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">Why AIStation</div>
+  <h2 class="section-title">AI that works for you,<br>not against you</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#EEF0FF">🔒</div>
+      <h3>Completely Private</h3>
+      <p>Your conversations, documents, and data never leave your device. Not stored. Not analyzed. Not sold. Ever.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#DCFCE7">💰</div>
+      <h3>Pay Once, Own It</h3>
+      <p>No ChatGPT subscription. No monthly fees. No usage limits. Buy the device, use it forever.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#FEF3C7">⚡</div>
+      <h3>Works Offline</h3>
+      <p>No WiFi? No problem. Your AI works anywhere — on a plane, in a cabin, wherever you are.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#FCE7F3">🎯</div>
+      <h3>Ready Out of the Box</h3>
+      <p>Plug in and start chatting. No technical setup, no command line, no configuration needed.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#E0F2FE">🤖</div>
+      <h3>Multiple AI Models</h3>
+      <p>Choose the right AI for each task — quick answers, deep thinking, or maximum power. Switch with one click.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#F3E8FF">🛟</div>
+      <h3>Real Human Support</h3>
+      <p>Something not working? We're a real team you can email. We'll help you fix it fast.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Up and running in minutes</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Order your AIStation</h3>
+      <p>We ship you a pre-configured laptop ready to go. No setup required.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Plug in and power on</h3>
+      <p>Boot it up and your AI assistant launches automatically. That's it.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Start using your AI</h3>
+      <p>Chat, write, research, analyze documents — all privately on your device.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>We keep it updated</h3>
+      <p>New models and features delivered automatically. Your AI keeps getting better.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title">Simple, honest pricing</h2>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">$399<span> one-time</span></div>
+      <div class="plan-desc">Perfect for everyday tasks and getting started with AI.</div>
+      <ul class="plan-features">
+        <li>Refurbished laptop, fully configured</li>
+        <li>2 AI models included</li>
+        <li>Chat interface</li>
+        <li>1 year of software updates</li>
+        <li>Email support</li>
+      </ul>
+      <button class="plan-btn outline" onclick="document.getElementById('hero-email').focus(); window.scrollTo({top:0,behavior:'smooth'})">Join Waitlist</button>
+    </div>
+    <div class="pricing-card featured">
+      <div class="popular-badge">Most Popular</div>
+      <div class="plan-name">Standard</div>
+      <div class="plan-price">$599<span> one-time</span></div>
+      <div class="plan-desc">More power, more models, for serious everyday use.</div>
+      <ul class="plan-features">
+        <li>Higher-spec refurbished laptop</li>
+        <li>4 AI models included</li>
+        <li>Chat interface + document Q&A</li>
+        <li>Lifetime software updates</li>
+        <li>Priority email support</li>
+        <li>Remote setup assistance</li>
+      </ul>
+      <button class="plan-btn filled" onclick="document.getElementById('hero-email').focus(); window.scrollTo({top:0,behavior:'smooth'})">Join Waitlist</button>
+    </div>
+    <div class="pricing-card">
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">$899<span> one-time</span></div>
+      <div class="plan-desc">Maximum capability for power users and small teams.</div>
+      <ul class="plan-features">
+        <li>High-performance laptop with GPU</li>
+        <li>All available AI models</li>
+        <li>Full suite of AI tools</li>
+        <li>Lifetime software updates</li>
+        <li>Phone + email support</li>
+        <li>1 year hardware warranty</li>
+      </ul>
+      <button class="plan-btn outline" onclick="document.getElementById('hero-email').focus(); window.scrollTo({top:0,behavior:'smooth'})">Join Waitlist</button>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <h2>Your AI is waiting.</h2>
+  <p>Join the waitlist and be first to know when AIStation ships. Early access pricing available.</p>
+  <div class="bottom-form">
+    <input type="email" id="bottom-email" placeholder="Enter your email" />
+    <button onclick="handleSignup('bottom-email', 'bottom-success')">Get Early Access</button>
+  </div>
+  <div class="success-msg" id="bottom-success" style="background:rgba(255,255,255,0.2); color:white; max-width:420px;">🎉 You're on the list! We'll be in touch soon.</div>
+  <p class="bottom-note">No spam. Unsubscribe any time.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 AIStation. All rights reserved. &nbsp;·&nbsp; <a href="mailto:support@aistation.com" style="color:var(--brand)">support@aistation.com</a>
+</footer>
+
+<script>
+function handleSignup(inputId, successId) {
+  const input = document.getElementById(inputId);
+  const success = document.getElementById(successId);
+  const email = input.value.trim();
+
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = '#EF4444';
+    input.focus();
+    return;
+  }
+
+  // In production: POST to your email service (Mailchimp, ConvertKit, etc.)
+  // For now: show success message
+  input.style.display = 'none';
+  input.parentElement.style.display = 'none';
+  success.style.display = 'block';
+
+  console.log('Signup:', email); // Replace with real API call
+}
+
+// Allow Enter key on inputs
+document.querySelectorAll('input[type=email]').forEach(input => {
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const btn = input.nextElementSibling;
+      if (btn) btn.click();
+    }
+  });
+});
+</script>
+
+</body>
+</html>
