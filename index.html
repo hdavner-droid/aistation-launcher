@@ -505,7 +505,7 @@ function handleSignup(inputId, successId) {
   input.parentElement.style.display = 'none';
   success.style.display = 'block';
 
-  console.log('Signup:', email); // Replace with real API call
+  fetch('https://formspree.io/f/mvzyjzzd', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email: email}) });
 }
 
 // Allow Enter key on inputs
@@ -521,3 +521,4 @@ document.querySelectorAll('input[type=email]').forEach(input => {
 
 </body>
 </html>
+<!-- formspree endpoint: https://formspree.io/f/mvzyjzzd -->
